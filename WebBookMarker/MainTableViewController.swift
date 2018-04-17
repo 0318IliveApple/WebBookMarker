@@ -10,11 +10,6 @@ import UIKit
 
 class MainTableViewController: UITableViewController {
     
-    class BookMarks {
-        var Name: String = "name"
-        var URL: String = "https://"
-        
-    }
     
     
     
