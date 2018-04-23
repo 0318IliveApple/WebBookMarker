@@ -15,19 +15,24 @@ class AddViewController: UIViewController {
     @IBOutlet var SiteImageVies: UIImageView!
     
     
-    class BookMarks {
-        var Name: String = "name"
-        var URL: String = "https://"
-        var SiteImage: UIImage!
-        
-    }
     var BookMarkArray: [Dictionary<String,String>] = []
-    let savedata = UserDefaults.standard
+    let saveData = UserDefaults.standard
+    
+//    class BookMarks {
+//        var Name: String = "name"
+//        var URL: String = "https://"
+//        var SiteImage: UIImage!
+//
+//    }
+    
+    
+    
+    
     
     @IBAction func addbookmarkes(){
         let BookMarkDictionaly = ["Name":NameTextField.text!,"URL":URLTextField.text!]
         BookMarkArray.append(BookMarkDictionaly)
-        savedata.set(BookMarkArray, forKey: "BOOKMARKS")
+        saveData.set(BookMarkArray, forKey: "BOOKMARKS")
         
         
         NameTextField.text = ""
@@ -38,8 +43,10 @@ class AddViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        if saveData.array(forKey: "BOOKMARKS") != nil{
+            BookMarkArray = saveData.array(forKey: "BOOKMARKS") as! [Dictionary<String,String>]
         // Do any additional setup after loading the view.
+        }
     }
 
     override func didReceiveMemoryWarning() {

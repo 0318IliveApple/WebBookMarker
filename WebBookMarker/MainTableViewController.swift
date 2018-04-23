@@ -10,17 +10,30 @@ import UIKit
 
 class MainTableViewController: UITableViewController {
     
-    
+    var BookMarkArray: [Dictionary<String,String>] = []
+    let saveData = UserDefaults.standard
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        tableView.register(UINib(nibName: "MainTableViewCell", bundle: nil), forCellReuseIdentifier: "cell")
 
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
+    }
+    
+    
+    override func viewWillAppear(_ animated: Bool) {
+        
+        super.viewWillAppear(true)
+        if saveData.array(forKey: "BOOKMARKS") != nil{
+            BookMarkArray = saveData.array(forKey: "BOOKMARKS") as! [Dictionary<String, String>]
+        }
+        print(BookMarkArray)
+        tableView.reloadData()
     }
 
     override func didReceiveMemoryWarning() {
@@ -32,13 +45,33 @@ class MainTableViewController: UITableViewController {
 
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
-        return 0
+        return 1
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return 0
+        return BookMarkArray.count
     }
+    
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
+            as! MainTableViewCell
+        
+        let nowIndexPathDictionaly = BookMarkArray[indexPath.row]
+        
+        cell.NameLabel.text = nowIndexPathDictionaly["Name"]
+        cell.URLLabel.text = nowIndexPathDictionaly["URL"]
+        
+        return cell
+    }
+    
+    
+    
+//    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: indexPath) ->UITableView{
+//        let cell = tableView.dequeueReusableCell(withIdentifier: "cell" ,for: indexPath) as! MainTableViewCell
+//
+//        cell.NameLabel()
+//    }
 
     /*
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
