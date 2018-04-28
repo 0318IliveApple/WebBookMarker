@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		503213BA79E52ACD7B8E56D0 /* Pods_WebBookMarkerUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CDDEABA7CCF66CFEEC757902 /* Pods_WebBookMarkerUITests.framework */; };
 		6037BCF82084598800506D7B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6037BCF72084598800506D7B /* AppDelegate.swift */; };
 		6037BCFA2084598800506D7B /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6037BCF92084598800506D7B /* ViewController.swift */; };
 		6037BCFD2084598800506D7B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6037BCFB2084598800506D7B /* Main.storyboard */; };
@@ -18,6 +19,11 @@
 		6037BD2920845E5C00506D7B /* MainTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6037BD2720845E5C00506D7B /* MainTableViewCell.swift */; };
 		6037BD2A20845E5C00506D7B /* MainTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6037BD2820845E5C00506D7B /* MainTableViewCell.xib */; };
 		6037BD41208591CD00506D7B /* AddViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6037BD40208591CD00506D7B /* AddViewController.swift */; };
+		6088D28F2092F89D0051BDFB /* WebViewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6088D28E2092F89D0051BDFB /* WebViewViewController.swift */; };
+		60A2C9182094593500E5FD33 /* script.js in Resources */ = {isa = PBXBuildFile; fileRef = 60A2C9162094593400E5FD33 /* script.js */; };
+		60A2C9192094593500E5FD33 /* CustomWKWebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60A2C9172094593500E5FD33 /* CustomWKWebView.swift */; };
+		B080B45C219DE83E03BA0F30 /* Pods_WebBookMarker.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A45A40F9D0B379425C6F396 /* Pods_WebBookMarker.framework */; };
+		C62A67E1104FEAC2F7C58C68 /* Pods_WebBookMarkerTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 91D194AA41026F6CDEC713EB /* Pods_WebBookMarkerTests.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -38,6 +44,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		1A45A40F9D0B379425C6F396 /* Pods_WebBookMarker.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WebBookMarker.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		319C8878E43844E7E39F0209 /* Pods-WebBookMarkerTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WebBookMarkerTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-WebBookMarkerTests/Pods-WebBookMarkerTests.release.xcconfig"; sourceTree = "<group>"; };
 		6037BCF42084598800506D7B /* WebBookMarker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WebBookMarker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6037BCF72084598800506D7B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		6037BCF92084598800506D7B /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -55,6 +63,16 @@
 		6037BD2720845E5C00506D7B /* MainTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTableViewCell.swift; sourceTree = "<group>"; };
 		6037BD2820845E5C00506D7B /* MainTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MainTableViewCell.xib; sourceTree = "<group>"; };
 		6037BD40208591CD00506D7B /* AddViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddViewController.swift; sourceTree = "<group>"; };
+		6088D28E2092F89D0051BDFB /* WebViewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewViewController.swift; sourceTree = "<group>"; };
+		608B654C917BC5A590C744FB /* Pods-WebBookMarkerUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WebBookMarkerUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-WebBookMarkerUITests/Pods-WebBookMarkerUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		60A2C9162094593400E5FD33 /* script.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = script.js; sourceTree = "<group>"; };
+		60A2C9172094593500E5FD33 /* CustomWKWebView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomWKWebView.swift; sourceTree = "<group>"; };
+		67B5DF58F89362F1D9C6A912 /* Pods-WebBookMarkerTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WebBookMarkerTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-WebBookMarkerTests/Pods-WebBookMarkerTests.debug.xcconfig"; sourceTree = "<group>"; };
+		86F4CC92241D220C50104446 /* Pods-WebBookMarkerUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WebBookMarkerUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-WebBookMarkerUITests/Pods-WebBookMarkerUITests.release.xcconfig"; sourceTree = "<group>"; };
+		91D194AA41026F6CDEC713EB /* Pods_WebBookMarkerTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WebBookMarkerTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		A981C2395E4E3046B9736E0F /* Pods-WebBookMarker.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WebBookMarker.release.xcconfig"; path = "Pods/Target Support Files/Pods-WebBookMarker/Pods-WebBookMarker.release.xcconfig"; sourceTree = "<group>"; };
+		B58E503DE90040DED0362AC2 /* Pods-WebBookMarker.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WebBookMarker.debug.xcconfig"; path = "Pods/Target Support Files/Pods-WebBookMarker/Pods-WebBookMarker.debug.xcconfig"; sourceTree = "<group>"; };
+		CDDEABA7CCF66CFEEC757902 /* Pods_WebBookMarkerUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WebBookMarkerUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -62,6 +80,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B080B45C219DE83E03BA0F30 /* Pods_WebBookMarker.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -69,6 +88,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C62A67E1104FEAC2F7C58C68 /* Pods_WebBookMarkerTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -76,12 +96,26 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				503213BA79E52ACD7B8E56D0 /* Pods_WebBookMarkerUITests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		45E2F718C928D411475A7F36 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				B58E503DE90040DED0362AC2 /* Pods-WebBookMarker.debug.xcconfig */,
+				A981C2395E4E3046B9736E0F /* Pods-WebBookMarker.release.xcconfig */,
+				67B5DF58F89362F1D9C6A912 /* Pods-WebBookMarkerTests.debug.xcconfig */,
+				319C8878E43844E7E39F0209 /* Pods-WebBookMarkerTests.release.xcconfig */,
+				608B654C917BC5A590C744FB /* Pods-WebBookMarkerUITests.debug.xcconfig */,
+				86F4CC92241D220C50104446 /* Pods-WebBookMarkerUITests.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		6037BCEB2084598800506D7B = {
 			isa = PBXGroup;
 			children = (
@@ -89,6 +123,8 @@
 				6037BD0B2084598A00506D7B /* WebBookMarkerTests */,
 				6037BD162084598B00506D7B /* WebBookMarkerUITests */,
 				6037BCF52084598800506D7B /* Products */,
+				45E2F718C928D411475A7F36 /* Pods */,
+				F9E29A336025158F664EC128 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -105,6 +141,8 @@
 		6037BCF62084598800506D7B /* WebBookMarker */ = {
 			isa = PBXGroup;
 			children = (
+				60A2C9172094593500E5FD33 /* CustomWKWebView.swift */,
+				60A2C9162094593400E5FD33 /* script.js */,
 				6037BCF72084598800506D7B /* AppDelegate.swift */,
 				6037BCF92084598800506D7B /* ViewController.swift */,
 				6037BCFB2084598800506D7B /* Main.storyboard */,
@@ -115,6 +153,7 @@
 				6037BD40208591CD00506D7B /* AddViewController.swift */,
 				6037BD2720845E5C00506D7B /* MainTableViewCell.swift */,
 				6037BD2820845E5C00506D7B /* MainTableViewCell.xib */,
+				6088D28E2092F89D0051BDFB /* WebViewViewController.swift */,
 			);
 			path = WebBookMarker;
 			sourceTree = "<group>";
@@ -137,6 +176,16 @@
 			path = WebBookMarkerUITests;
 			sourceTree = "<group>";
 		};
+		F9E29A336025158F664EC128 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				1A45A40F9D0B379425C6F396 /* Pods_WebBookMarker.framework */,
+				91D194AA41026F6CDEC713EB /* Pods_WebBookMarkerTests.framework */,
+				CDDEABA7CCF66CFEEC757902 /* Pods_WebBookMarkerUITests.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -144,9 +193,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 6037BD1C2084598B00506D7B /* Build configuration list for PBXNativeTarget "WebBookMarker" */;
 			buildPhases = (
+				C9808DBF278F1BCA3F706314 /* [CP] Check Pods Manifest.lock */,
 				6037BCF02084598800506D7B /* Sources */,
 				6037BCF12084598800506D7B /* Frameworks */,
 				6037BCF22084598800506D7B /* Resources */,
+				7871EAF1EB852807A2EB0E54 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -161,6 +212,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 6037BD1F2084598B00506D7B /* Build configuration list for PBXNativeTarget "WebBookMarkerTests" */;
 			buildPhases = (
+				E1E19C7495BD55FAD2FBD9EB /* [CP] Check Pods Manifest.lock */,
 				6037BD042084598A00506D7B /* Sources */,
 				6037BD052084598A00506D7B /* Frameworks */,
 				6037BD062084598A00506D7B /* Resources */,
@@ -179,6 +231,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 6037BD222084598B00506D7B /* Build configuration list for PBXNativeTarget "WebBookMarkerUITests" */;
 			buildPhases = (
+				4601050AB10134E181FEAFF7 /* [CP] Check Pods Manifest.lock */,
 				6037BD0F2084598B00506D7B /* Sources */,
 				6037BD102084598B00506D7B /* Frameworks */,
 				6037BD112084598B00506D7B /* Resources */,
@@ -241,6 +294,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				60A2C9182094593500E5FD33 /* script.js in Resources */,
 				6037BD022084598A00506D7B /* LaunchScreen.storyboard in Resources */,
 				6037BCFF2084598A00506D7B /* Assets.xcassets in Resources */,
 				6037BD2A20845E5C00506D7B /* MainTableViewCell.xib in Resources */,
@@ -264,6 +318,83 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		4601050AB10134E181FEAFF7 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-WebBookMarkerUITests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		7871EAF1EB852807A2EB0E54 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-WebBookMarker/Pods-WebBookMarker-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Realm/Realm.framework",
+				"${BUILT_PRODUCTS_DIR}/RealmSwift/RealmSwift.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Realm.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RealmSwift.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-WebBookMarker/Pods-WebBookMarker-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		C9808DBF278F1BCA3F706314 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-WebBookMarker-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		E1E19C7495BD55FAD2FBD9EB /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-WebBookMarkerTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		6037BCF02084598800506D7B /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -271,8 +402,10 @@
 			files = (
 				6037BD41208591CD00506D7B /* AddViewController.swift in Sources */,
 				6037BCFA2084598800506D7B /* ViewController.swift in Sources */,
+				60A2C9192094593500E5FD33 /* CustomWKWebView.swift in Sources */,
 				6037BD2620845E2C00506D7B /* MainTableViewController.swift in Sources */,
 				6037BD2920845E5C00506D7B /* MainTableViewCell.swift in Sources */,
+				6088D28F2092F89D0051BDFB /* WebViewViewController.swift in Sources */,
 				6037BCF82084598800506D7B /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -444,17 +577,17 @@
 		};
 		6037BD1D2084598B00506D7B /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = B58E503DE90040DED0362AC2 /* Pods-WebBookMarker.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 7G4R772ZVB;
+				DEVELOPMENT_TEAM = G38P4Z3EJZ;
 				INFOPLIST_FILE = WebBookMarker/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = prepre.WebBookMarker;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.prepre.WebBookMarker;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -462,17 +595,17 @@
 		};
 		6037BD1E2084598B00506D7B /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = A981C2395E4E3046B9736E0F /* Pods-WebBookMarker.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 7G4R772ZVB;
+				DEVELOPMENT_TEAM = G38P4Z3EJZ;
 				INFOPLIST_FILE = WebBookMarker/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = prepre.WebBookMarker;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.prepre.WebBookMarker;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -480,17 +613,14 @@
 		};
 		6037BD202084598B00506D7B /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 67B5DF58F89362F1D9C6A912 /* Pods-WebBookMarkerTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 7G4R772ZVB;
 				INFOPLIST_FILE = WebBookMarkerTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = prepre.WebBookMarkerTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
@@ -501,17 +631,14 @@
 		};
 		6037BD212084598B00506D7B /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 319C8878E43844E7E39F0209 /* Pods-WebBookMarkerTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 7G4R772ZVB;
 				INFOPLIST_FILE = WebBookMarkerTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = prepre.WebBookMarkerTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
@@ -522,16 +649,13 @@
 		};
 		6037BD232084598B00506D7B /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 608B654C917BC5A590C744FB /* Pods-WebBookMarkerUITests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 7G4R772ZVB;
 				INFOPLIST_FILE = WebBookMarkerUITests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = prepre.WebBookMarkerUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
@@ -542,16 +666,13 @@
 		};
 		6037BD242084598B00506D7B /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 86F4CC92241D220C50104446 /* Pods-WebBookMarkerUITests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 7G4R772ZVB;
 				INFOPLIST_FILE = WebBookMarkerUITests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = prepre.WebBookMarkerUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;

@@ -9,14 +9,25 @@
 import UIKit
 
 class MainTableViewController: UITableViewController {
+//    CustomWKWebDelegate
+//    func urlDidGet(customWebView: CustomWKWebView, arrURL: [URL]) {
+//        if arrURL.isEmpty == false{
+//            for temp in arrURL{
+//                download(url: temp)
+//            }
+//        }
+//    }
+    
     
     var BookMarkArray: [Dictionary<String,String>] = []
     let saveData = UserDefaults.standard
     
+    //編集ボタンの追加
     
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.register(UINib(nibName: "MainTableViewCell", bundle: nil), forCellReuseIdentifier: "cell")
+        navigationItem.rightBarButtonItem = editButtonItem
 
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
@@ -25,6 +36,13 @@ class MainTableViewController: UITableViewController {
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
     }
     
+    override func setEditing(_ editing: Bool, animated: Bool) {
+        super.setEditing(editing, animated: animated)
+        
+        tableView.setEditing(editing, animated: animated)
+    }
+    
+    
     
     override func viewWillAppear(_ animated: Bool) {
         
@@ -32,7 +50,6 @@ class MainTableViewController: UITableViewController {
         if saveData.array(forKey: "BOOKMARKS") != nil{
             BookMarkArray = saveData.array(forKey: "BOOKMARKS") as! [Dictionary<String, String>]
         }
-        print(BookMarkArray)
         tableView.reloadData()
     }
 
@@ -65,6 +82,31 @@ class MainTableViewController: UITableViewController {
         return cell
     }
     
+    override func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
+        
+        let deleteButton: UITableViewRowAction = UITableViewRowAction(style: .normal, title: "削除") { (action, index) -> Void in
+            self.BookMarkArray.remove(at: indexPath.row)
+            tableView.deleteRows(at: [indexPath], with: .fade)
+            self.saveData.set(self.BookMarkArray, forKey: "BOOKMARKS")
+        }
+        deleteButton.backgroundColor = UIColor.red
+        
+        return [deleteButton]
+    }
+    
+    //画面遷移
+    override func tableView(_ table: UITableView, didSelectRowAt indexPath: IndexPath) {
+            // SubViewController へ遷移するために Segue を呼び出す
+        
+        var selectedDic = BookMarkArray[indexPath.row]["URL"]
+        
+        performSegue(withIdentifier: "toWebSegue", sender: selectedDic)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let webViewController = segue.destination as! WebViewViewController
+        webViewController.url = sender as! String
+    }
     
     
 //    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: indexPath) ->UITableView{

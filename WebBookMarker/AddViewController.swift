@@ -30,6 +30,7 @@ class AddViewController: UIViewController {
     
     
     @IBAction func addbookmarkes(){
+        
         let BookMarkDictionaly = ["Name":NameTextField.text!,"URL":URLTextField.text!]
         BookMarkArray.append(BookMarkDictionaly)
         saveData.set(BookMarkArray, forKey: "BOOKMARKS")
@@ -37,6 +38,8 @@ class AddViewController: UIViewController {
         
         NameTextField.text = ""
         URLTextField.text = ""
+        NameTextField.endEditing(true)
+        URLTextField.endEditing(true)
         
     }
     
@@ -48,7 +51,14 @@ class AddViewController: UIViewController {
         // Do any additional setup after loading the view.
         }
     }
-
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewDidLoad()
+        if saveData.array(forKey: "BOOKMARKS") != nil{
+            BookMarkArray = saveData.array(forKey: "BOOKMARKS") as! [Dictionary<String,String>]
+            // Do any additional setup after loading the view.
+        }
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
