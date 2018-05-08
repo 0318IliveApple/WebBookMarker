@@ -7,33 +7,38 @@
 //
 
 import UIKit
+import RealmSwift
 
 class AddViewController: UIViewController {
     
     @IBOutlet var NameTextField: UITextField!
     @IBOutlet var URLTextField: UITextField!
     @IBOutlet var SiteImageVies: UIImageView!
+    @IBOutlet var CategoryPicker: UIPickerView!
+    @IBOutlet var PrivatePicker: UIPickerView!
     
     
-    var BookMarkArray: [Dictionary<String,String>] = []
     let saveData = UserDefaults.standard
     
-//    class BookMarks {
-//        var Name: String = "name"
-//        var URL: String = "https://"
-//        var SiteImage: UIImage!
-//
-//    }
-    
-    
-    
+//    var BookMarkArray:[Bookmark] = []
     
     
     @IBAction func addbookmarkes(){
         
-        let BookMarkDictionaly = ["Name":NameTextField.text!,"URL":URLTextField.text!]
-        BookMarkArray.append(BookMarkDictionaly)
-        saveData.set(BookMarkArray, forKey: "BOOKMARKS")
+        let BookMark = Bookmark()
+        BookMark.num_private = 0
+        BookMark.name = NameTextField.text!
+        BookMark.URL = URLTextField.text!
+        BookMark.time = NSDate()
+
+//        BookMarkArray.append(BookMark)
+//        saveData.set(BookMarkArray, forKey: "BOOKMARKS")
+        
+        let realm = try! Realm()
+        
+        try! realm.write({
+            realm.add(BookMark)
+        })
         
         
         NameTextField.text = ""
@@ -41,22 +46,32 @@ class AddViewController: UIViewController {
         NameTextField.endEditing(true)
         URLTextField.endEditing(true)
         
+        let  bookmarks = realm.objects(Bookmark.self)
+        if let bookmark = bookmarks.first {
+            print("############################")
+            print(bookmarks)
+            print(type(of: bookmarks))
+            print(bookmark)
+            print(type(of: bookmark))
+            print("############################")
+        }
+        
     }
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        if saveData.array(forKey: "BOOKMARKS") != nil{
-            BookMarkArray = saveData.array(forKey: "BOOKMARKS") as! [Dictionary<String,String>]
-        // Do any additional setup after loading the view.
-        }
+//        if saveData.array(forKey: "BOOKMARKS") != nil{
+//            BookMarkArray = saveData.array(forKey: "BOOKMARKS") as! [Bookmark]
+//        // Do any additional setup after loading the view.
+//        }
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewDidLoad()
-        if saveData.array(forKey: "BOOKMARKS") != nil{
-            BookMarkArray = saveData.array(forKey: "BOOKMARKS") as! [Dictionary<String,String>]
-            // Do any additional setup after loading the view.
-        }
+//        if saveData.array(forKey: "BOOKMARKS") != nil{
+//            BookMarkArray = saveData.array(forKey: "BOOKMARKS") as! [Bookmark]
+//            // Do any additional setup after loading the view.
+//        }
     }
     
     override func didReceiveMemoryWarning() {

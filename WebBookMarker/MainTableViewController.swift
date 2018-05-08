@@ -7,8 +7,15 @@
 //
 
 import UIKit
+import RealmSwift
 
 class MainTableViewController: UITableViewController {
+    
+    let realm = try! Realm()
+    var bookmarks: Results<Bookmark>! = nil
+    var BookMarkArray: [Bookmark] = []
+    
+    
 //    CustomWKWebDelegate
 //    func urlDidGet(customWebView: CustomWKWebView, arrURL: [URL]) {
 //        if arrURL.isEmpty == false{
@@ -19,8 +26,8 @@ class MainTableViewController: UITableViewController {
 //    }
     
     
-    var BookMarkArray: [Dictionary<String,String>] = []
-    let saveData = UserDefaults.standard
+//    var BookMarkArray: [Bookmark] = []
+//    let saveData = UserDefaults.standard
     
     //編集ボタンの追加
     
@@ -47,9 +54,14 @@ class MainTableViewController: UITableViewController {
     override func viewWillAppear(_ animated: Bool) {
         
         super.viewWillAppear(true)
-        if saveData.array(forKey: "BOOKMARKS") != nil{
-            BookMarkArray = saveData.array(forKey: "BOOKMARKS") as! [Dictionary<String, String>]
-        }
+//        if saveData.array(forKey: "BOOKMARKS") != nil{
+//            BookMarkArray = saveData.array(forKey: "BOOKMARKS") as! [Bookmark]
+//        }
+        
+        //BOOKMARKS読み込み
+        bookmarks = realm.objects(Bookmark.self)
+        BookMarkArray = Array(bookmarks)
+        print(bookmarks)
         tableView.reloadData()
     }
 
@@ -74,20 +86,23 @@ class MainTableViewController: UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
             as! MainTableViewCell
         
-        let nowIndexPathDictionaly = BookMarkArray[indexPath.row]
-        
-        cell.NameLabel.text = nowIndexPathDictionaly["Name"]
-        cell.URLLabel.text = nowIndexPathDictionaly["URL"]
+        // Cellの表示
+        let nowIndexPath = BookMarkArray[indexPath.row]
+        cell.NameLabel.text = nowIndexPath.name
+        cell.URLLabel.text = nowIndexPath.URL
         
         return cell
     }
     
     override func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
         
+        //削除機能
         let deleteButton: UITableViewRowAction = UITableViewRowAction(style: .normal, title: "削除") { (action, index) -> Void in
             self.BookMarkArray.remove(at: indexPath.row)
             tableView.deleteRows(at: [indexPath], with: .fade)
-            self.saveData.set(self.BookMarkArray, forKey: "BOOKMARKS")
+//            self.saveData.set(self.BookMarkArray, forKey: "BOOKMARKS")
+            
+            
         }
         deleteButton.backgroundColor = UIColor.red
         
@@ -98,7 +113,7 @@ class MainTableViewController: UITableViewController {
     override func tableView(_ table: UITableView, didSelectRowAt indexPath: IndexPath) {
             // SubViewController へ遷移するために Segue を呼び出す
         
-        var selectedDic = BookMarkArray[indexPath.row]["URL"]
+        var selectedDic = BookMarkArray[indexPath.row].URL
         
         performSegue(withIdentifier: "toWebSegue", sender: selectedDic)
     }
