@@ -11,10 +11,12 @@ import RealmSwift
 
 
 class Bookmark: Object {
-    @objc dynamic var num_private:Int = 0
+    @objc dynamic var PrivateNum:Int = 0
     @objc dynamic var name:String = ""
     @objc dynamic var URL:String = ""
     @objc dynamic var time = NSDate()
-    @objc dynamic var Image:String = ""
+    @objc dynamic var Image : NSData!
+    @objc dynamic var CategoryNum:Int = 0
+    
 }
 

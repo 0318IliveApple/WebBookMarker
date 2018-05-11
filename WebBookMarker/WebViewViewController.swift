@@ -16,16 +16,14 @@ class WebViewViewController: UIViewController {
     
     
     
-    var url:String = ""
+    var url:String!
     @IBOutlet var tes: UILabel!
     
     func loadURL() {
-        print(url)
         tes.text = String(url)
         let requestURL = URL(string: url)
         let request = NSURLRequest(url: requestURL!)
         WebView.loadRequest(request as URLRequest)
-        
     }
     
     

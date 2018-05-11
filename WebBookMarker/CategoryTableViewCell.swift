@@ -1,19 +1,16 @@
 //
-//  MainTableViewCell.swift
+//  CategoryTableViewCell.swift
 //  WebBookMarker
 //
-//  Created by 中嶋裕也 on 2018/04/16.
+//  Created by 中嶋裕也 on 2018/05/09.
 //  Copyright © 2018年 中嶋裕也. All rights reserved.
 //
 
 import UIKit
 
-class MainTableViewCell: UITableViewCell {
+class CategoryTableViewCell: UITableViewCell {
     
-    @IBOutlet var NameLabel: UILabel!
-    @IBOutlet var URLLabel: UILabel!
-    @IBOutlet var PageImage: UIImageView!
-    @IBOutlet var CategoryLabel: UILabel!
+    @IBOutlet var Name: UILabel!
 
     override func awakeFromNib() {
         super.awakeFromNib()
