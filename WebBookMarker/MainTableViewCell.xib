@@ -26,32 +26,40 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="https://abcdefg/hijk" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cO2-Bu-kAG">
-                        <rect key="frame" x="63" y="40" width="237" height="12"/>
+                        <rect key="frame" x="63" y="40" width="154" height="12"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <fontDescription key="fontDescription" type="system" weight="thin" pointSize="10"/>
                         <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fu8-VK-YNL">
-                        <rect key="frame" x="0.0" y="0.0" width="60" height="60"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dXH-0T-Zhj">
-                        <rect key="frame" x="255" y="19" width="42" height="21"/>
+                        <rect key="frame" x="225" y="31" width="79" height="21"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                        <nil key="textColor"/>
+                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="0.42735980309999999" colorSpace="custom" customColorSpace="displayP3"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9eO-Gw-nEK">
+                        <rect key="frame" x="0.0" y="0.0" width="59" height="60"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <state key="normal" image="Non-check"/>
+                        <connections>
+                            <action selector="ChageCheck" destination="KGk-i7-Jjw" eventType="touchUpInside" id="rbY-0U-ysI"/>
+                        </connections>
+                    </button>
                 </subviews>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
                 <outlet property="CategoryLabel" destination="dXH-0T-Zhj" id="2FC-nR-iLc"/>
+                <outlet property="Check" destination="9eO-Gw-nEK" id="pXA-jn-dus"/>
                 <outlet property="NameLabel" destination="6tf-8N-LrV" id="teT-j0-EkA"/>
                 <outlet property="URLLabel" destination="cO2-Bu-kAG" id="8KP-OH-agT"/>
             </connections>
             <point key="canvasLocation" x="25" y="61"/>
         </tableViewCell>
     </objects>
+    <resources>
+        <image name="Non-check" width="613" height="614"/>
+    </resources>
 </document>

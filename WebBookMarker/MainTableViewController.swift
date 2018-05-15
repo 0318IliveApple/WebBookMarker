@@ -10,6 +10,8 @@ import UIKit
 import RealmSwift
 
 extension NSDate: Comparable {}
+
+//比較
 public func <(before: NSDate, after: NSDate) -> Bool {
     return before.compare(after as Date) == .orderedAscending
 }
@@ -101,11 +103,21 @@ class MainTableViewController: UITableViewController {
         let nowIndexPath = BookMarkArray[indexPath.row]
         cell.NameLabel.text = nowIndexPath.name
         cell.URLLabel.text = nowIndexPath.URL
-        cell.CategoryLabel.text = CategoryArray[nowIndexPath.CategoryNum]
+        if CategoryArray.count > nowIndexPath.CategoryNum {
+            //out of range 防止
+            cell.CategoryLabel.text = CategoryArray[nowIndexPath.CategoryNum]
+        }
         
         
+        cell.row = indexPath.row
         //画像表示
-
+        let checkImg = UIImage(named: "check")
+        let nonCheckImg = UIImage(named: "Non-check")
+        if nowIndexPath.Read == 0 {
+            cell.Check.setImage(nonCheckImg, for: .normal)
+        }else{
+            cell.Check.setImage(checkImg, for: .normal)
+        }
         
 //        var iconimage = UIImage(data: nowIndexPath.Image as Data)
 //        iconimage = UIImage(data: nowIndexPath.Image as Data)
@@ -147,6 +159,11 @@ class MainTableViewController: UITableViewController {
         
         let selectedDic = BookMarkArray[indexPath.row].URL
         
+        try! self.realm.write() {
+            bookmarks[indexPath.row].Read = 1
+        }
+        tableView.reloadData()
+        
         performSegue(withIdentifier: "toWebSegue", sender: selectedDic)
     }
     
@@ -174,12 +191,20 @@ class MainTableViewController: UITableViewController {
             self.tableView.reloadData()
         }))
         
+        alert.addAction(UIAlertAction(title: "完了", style: .default, handler: { ACTION in
+            //カテゴリ順ソート
+            self.SortButton.setTitle("完了順", for: .normal)
+            self.BookMarkArray.sort(by: { $0.Read < $1.Read })
+            self.tableView.reloadData()
+        }))
+        
         alert.addAction(UIAlertAction(title: "キャンセル", style: .cancel, handler: { ACTION in
             
         }))
         self.present(alert, animated: true, completion: nil)
         
     }
+    
     
     
     //    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: indexPath) ->UITableView{

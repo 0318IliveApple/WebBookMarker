@@ -36,6 +36,7 @@ class AddViewController: UIViewController, CustomWKWebDelegate, WKNavigationDele
         BookMark.time = NSDate()
         BookMark.PrivateNum = PrivateNum
         BookMark.CategoryNum = CaregoryNum
+        BookMark.Read = 0
         
 //        BookMarkArray.append(BookMark)
 //        saveData.set(BookMarkArray, forKey: "BOOKMARKS")
