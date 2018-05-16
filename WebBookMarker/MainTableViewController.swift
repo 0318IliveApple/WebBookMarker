@@ -20,9 +20,14 @@ class MainTableViewController: UITableViewController {
     let realm = try! Realm()
     var bookmarks: Results<Bookmark>! = nil
     var BookMarkArray: [Bookmark] = []
+    var PrivateBookMarkArray: [Bookmark] = []
     var CategoryArray:[String] = []
     let CategorySaveData = UserDefaults.standard
+    var SortedNum:Int = 0
+    var PrivateMode:Bool = false
+    let PasswordSaveData = UserDefaults.standard
     @IBOutlet var SortButton: UIButton!
+    @IBOutlet var CangePrivateButton: UIButton!
     
     
     //    CustomWKWebDelegate
@@ -43,7 +48,8 @@ class MainTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.register(UINib(nibName: "MainTableViewCell", bundle: nil), forCellReuseIdentifier: "cell")
-        navigationItem.rightBarButtonItem = editButtonItem
+//        navigationItem.rightBarButtonItem = editButtonItem
+//        navigationItem.rightBarButtonItem?.title = "削除"
         
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
@@ -52,11 +58,12 @@ class MainTableViewController: UITableViewController {
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
     }
     
-    override func setEditing(_ editing: Bool, animated: Bool) {
-        super.setEditing(editing, animated: animated)
-        
-        tableView.setEditing(editing, animated: animated)
-    }
+//    override func setEditing(_ editing: Bool, animated: Bool) {
+//        super.setEditing(editing, animated: animated)
+//
+//        tableView.setEditing(editing, animated: animated)
+//        navigationItem.rightBarButtonItem?.title = "削除"
+//    }
     
     
     
@@ -72,10 +79,22 @@ class MainTableViewController: UITableViewController {
         }
         
         //BOOKMARKS読み込み
-        bookmarks = realm.objects(Bookmark.self)
-        BookMarkArray = Array(bookmarks)
-        print(bookmarks)
-        tableView.reloadData()
+        
+        
+        if PrivateMode == false {
+            bookmarks = realm.objects(Bookmark.self).filter(" PrivateNum == 0")
+            BookMarkArray = Array(bookmarks)
+            self.sort(num: self.SortedNum)
+            tableView.reloadData()
+            CangePrivateButton.setImage(UIImage(named: "Lock"), for: .normal)
+            
+        }else {
+            bookmarks = realm.objects(Bookmark.self)
+            PrivateBookMarkArray = Array(bookmarks)
+            self.sort(num: self.SortedNum)
+            tableView.reloadData()
+            self.CangePrivateButton.setImage(UIImage(named: "unLock"), for: .normal)
+        }
     }
     
     override func didReceiveMemoryWarning() {
@@ -92,7 +111,11 @@ class MainTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return BookMarkArray.count
+        if PrivateMode == false {
+            return BookMarkArray.count
+        } else {
+            return PrivateBookMarkArray.count
+        }
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -100,7 +123,12 @@ class MainTableViewController: UITableViewController {
             as! MainTableViewCell
         
         // Cellの表示
-        let nowIndexPath = BookMarkArray[indexPath.row]
+        var nowIndexPath: Bookmark
+        if PrivateMode == true {
+            nowIndexPath = PrivateBookMarkArray[indexPath.row]
+        }else{
+            nowIndexPath = BookMarkArray[indexPath.row]
+        }
         cell.NameLabel.text = nowIndexPath.name
         cell.URLLabel.text = nowIndexPath.URL
         if CategoryArray.count > nowIndexPath.CategoryNum {
@@ -108,8 +136,17 @@ class MainTableViewController: UITableViewController {
             cell.CategoryLabel.text = CategoryArray[nowIndexPath.CategoryNum]
         }
         
+        //鍵表示
+        if nowIndexPath.PrivateNum == 1{
+            cell.PrivateImage.isHidden = false
+            cell.PrivateImage.image = UIImage(named: "Lock")
+        }else{
+            cell.PrivateImage.isHidden = true
+        }
+        
         
         cell.row = indexPath.row
+        cell.PrivateMode = self.PrivateMode
         //画像表示
         let checkImg = UIImage(named: "check")
         let nonCheckImg = UIImage(named: "Non-check")
@@ -142,6 +179,7 @@ class MainTableViewController: UITableViewController {
                 self.realm.delete(pre)
             }
             
+            self.reloadarray()
             
             
             //            self.saveData.set(self.BookMarkArray, forKey: "BOOKMARKS")
@@ -162,7 +200,7 @@ class MainTableViewController: UITableViewController {
         try! self.realm.write() {
             bookmarks[indexPath.row].Read = 1
         }
-        tableView.reloadData()
+        reloadarray()
         
         performSegue(withIdentifier: "toWebSegue", sender: selectedDic)
     }
@@ -172,30 +210,77 @@ class MainTableViewController: UITableViewController {
         webViewController.url = sender as! String
     }
     
+    
+    //Privatemode
+    
+    @IBAction func ChangePrivate() {
+        
+        if PrivateMode == false {
+            let alert = UIAlertController(title: "パスワードを入力してください", message: "", preferredStyle: .alert)
+            
+            let CancelAction: UIAlertAction = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.cancel, handler: {
+                //キャンセルアクション
+                (action:UIAlertAction!) -> Void in
+            })
+            let DoneAction:UIAlertAction = UIAlertAction(title: "Done", style: UIAlertActionStyle.default, handler: {
+                (action:UIAlertAction!) -> Void in
+                //OKアクション
+                if alert.textFields != nil {
+                    if self.PasswordSaveData.string(forKey: "PASSWORD") == alert.textFields![0].text! {
+                        //パスワート正解
+                        self.CangePrivateButton.setImage(UIImage(named: "unLock"), for: .normal)
+                        self.PrivateMode = true
+                        self.reloadarray()
+                        
+                    }else {
+                        //パスワード不正解
+                        let alertPass = UIAlertController(title: "パスワートが違います", message: "", preferredStyle: .alert)
+                        alertPass.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+                        self.present(alertPass, animated: true, completion: nil)
+                    }
+                }
+                
+            })
+            alert.addAction(CancelAction)
+            alert.addAction(DoneAction)
+            
+            alert.addTextField(configurationHandler: {(text:UITextField!) -> Void in
+                text.placeholder = "Password"})
+            
+            present(alert, animated: true, completion: nil)
+            
+        }else {
+            self.CangePrivateButton.setImage(UIImage(named: "Lock"), for: .normal)
+            PrivateMode = false
+            reloadarray()
+        }
+        
+    }
+    
     //Sort
+    
     
     @IBAction func Sort(){
         let alert = UIAlertController(title: "並べ替え", message: "", preferredStyle: .actionSheet)
         
-        alert.addAction(UIAlertAction(title: "日付", style: .default, handler: { ACTION in
-            //カテゴリ順ソート
-            self.SortButton.setTitle("日付順", for: .normal)
-            self.BookMarkArray.sort(by: { $0.time.compare($1.time as Date) == ComparisonResult.orderedDescending})
-            self.tableView.reloadData()
+        alert.addAction(UIAlertAction(title: "日付　降順", style: .default, handler: { ACTION in
+            self.SortedNum = 0
+            self.sort(num: self.SortedNum)
+        }))
+        
+        alert.addAction(UIAlertAction(title: "日付　昇順", style: .default, handler: { ACTION in
+            self.SortedNum = 1
+            self.sort(num: self.SortedNum)
         }))
         
         alert.addAction(UIAlertAction(title: "カテゴリ", style: .default, handler: { ACTION in
-            //カテゴリ順ソート
-            self.SortButton.setTitle("カテゴリ順", for: .normal)
-            self.BookMarkArray.sort(by: { $0.CategoryNum < $1.CategoryNum })
-            self.tableView.reloadData()
+            self.SortedNum = 2
+            self.sort(num: self.SortedNum)
         }))
         
         alert.addAction(UIAlertAction(title: "完了", style: .default, handler: { ACTION in
-            //カテゴリ順ソート
-            self.SortButton.setTitle("完了順", for: .normal)
-            self.BookMarkArray.sort(by: { $0.Read < $1.Read })
-            self.tableView.reloadData()
+            self.SortedNum = 3
+            self.sort(num: self.SortedNum)
         }))
         
         alert.addAction(UIAlertAction(title: "キャンセル", style: .cancel, handler: { ACTION in
@@ -203,6 +288,44 @@ class MainTableViewController: UITableViewController {
         }))
         self.present(alert, animated: true, completion: nil)
         
+    }
+    
+    
+    func reloadarray(){
+        bookmarks = realm.objects(Bookmark.self).filter(" PrivateNum == 0")
+        BookMarkArray = Array(bookmarks)
+        bookmarks = realm.objects(Bookmark.self)
+        PrivateBookMarkArray = Array(bookmarks)
+        self.sort(num: self.SortedNum)
+        tableView.reloadData()
+    }
+    
+    func sort(num:Int) -> Void{
+        if num == 0 {
+            //日付　降順
+            self.SortButton.setTitle("日付順　降順", for: .normal)
+            self.BookMarkArray.sort(by: { $0.time.compare($1.time as Date) == ComparisonResult.orderedDescending})
+            self.PrivateBookMarkArray.sort(by: { $0.time.compare($1.time as Date) == ComparisonResult.orderedDescending})
+            self.tableView.reloadData()
+        }else if num == 1 {
+            //日付　昇順
+            self.SortButton.setTitle("日付　昇順", for: .normal)
+            self.BookMarkArray.sort(by: { $0.time.compare($1.time as Date) == ComparisonResult.orderedDescending})
+            self.PrivateBookMarkArray.reverse()
+            self.tableView.reloadData()
+        }else if num == 2 {
+            //カテゴリ順ソート
+            self.SortButton.setTitle("カテゴリ順", for: .normal)
+            self.BookMarkArray.sort(by: { $0.CategoryNum < $1.CategoryNum })
+            self.PrivateBookMarkArray.sort(by: { $0.CategoryNum < $1.CategoryNum })
+            self.tableView.reloadData()
+        }else if num == 3 {
+            //完了順ソート
+            self.SortButton.setTitle("完了順", for: .normal)
+            self.BookMarkArray.sort(by: { $0.Read < $1.Read })
+            self.PrivateBookMarkArray.sort(by: { $0.Read < $1.Read })
+            self.tableView.reloadData()
+        }
     }
     
     

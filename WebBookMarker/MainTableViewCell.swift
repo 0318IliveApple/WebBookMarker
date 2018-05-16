@@ -16,10 +16,11 @@ class MainTableViewCell: UITableViewCell {
     @IBOutlet var PageImage: UIImageView!
     @IBOutlet var CategoryLabel: UILabel!
     @IBOutlet var Check:UIButton!
+    @IBOutlet var PrivateImage:UIImageView!
     
     var row: Int!
-    
     let realm = try! Realm()
+    var PrivateMode:Bool!
     
 
     
@@ -27,8 +28,12 @@ class MainTableViewCell: UITableViewCell {
     let checkImg = UIImage(named: "check")
     let nonCheckImg = UIImage(named: "Non-check")
     @IBAction func ChageCheck(){
-        let BookMarks = realm.objects(Bookmark.self)
-        // ==0 is "have not read"
+        var BookMarks = realm.objects(Bookmark.self)
+        if PrivateMode == false {
+            BookMarks = realm.objects(Bookmark.self).filter(" PrivateNum == 0")
+        }else{
+            BookMarks = realm.objects(Bookmark.self)
+        }
         if BookMarks[row].Read == 0 {
             try! self.realm.write() {
                 BookMarks[row].Read = 1
@@ -39,8 +44,8 @@ class MainTableViewCell: UITableViewCell {
                 BookMarks[row].Read = 0
             }
             Check.setImage(nonCheckImg, for: .normal)
+            
         }
-        
         print(BookMarks)
     }
     

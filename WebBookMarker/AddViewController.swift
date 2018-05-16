@@ -20,13 +20,57 @@ class AddViewController: UIViewController, CustomWKWebDelegate, WKNavigationDele
     
     var testWeb: CustomWKWebView!
     var iconImage: UIImage!
-    let PrivateArray  = ["YES","NO"]
+    let PrivateArray  = ["Non-Private","Private"]
     let CategorySaveData = UserDefaults.standard
     var CategoryArray:[String] = []
     var CaregoryNum: Int = 0
     var PrivateNum: Int = 0
     
+    let PasswordSaveData = UserDefaults.standard
     
+    
+    
+    @IBAction func changePassWord(){
+        if PasswordSaveData != nil{
+            let alert = UIAlertController(title: "パスワードを入力してください", message: "", preferredStyle: .alert)
+            
+            let CancelAction: UIAlertAction = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.cancel, handler: {
+                //キャンセルアクション
+                (action:UIAlertAction!) -> Void in
+            })
+            let DoneAction:UIAlertAction = UIAlertAction(title: "Done", style: UIAlertActionStyle.default, handler: {
+                (action:UIAlertAction!) -> Void in
+                //OKアクション
+                if alert.textFields != nil {
+                    if self.PasswordSaveData.string(forKey: "PASSWORD") == alert.textFields![0].text! {
+                        //パスワート正解
+                        self.PasswordSaveData.set(alert.textFields![1].text, forKey: "PASSWORD")
+                        
+                    }else {
+                        //パスワード不正解
+                        let alertPass = UIAlertController(title: "パスワートが違います", message: "", preferredStyle: .alert)
+                        alertPass.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+                        self.present(alertPass, animated: true, completion: nil)
+                    }
+                }
+                
+            })
+            alert.addAction(CancelAction)
+            alert.addAction(DoneAction)
+            
+            alert.addTextField(configurationHandler: {(text:UITextField!) -> Void in
+                text.placeholder = "Old-Password"})
+            alert.addTextField(configurationHandler: {(text:UITextField!) -> Void in
+                text.placeholder = "New-Password"})
+            
+            present(alert, animated: true, completion: nil)
+        }else{
+            //パスワートを入力してください
+            let alert_password = UIAlertController(title: "パスワードが設定されていません", message: "", preferredStyle: .alert)
+            alert_password.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+            present(alert_password, animated: true, completion: nil)
+        }
+    }
     //BookMark追加
     @IBAction func addbookmarkes(){
         
@@ -40,50 +84,50 @@ class AddViewController: UIViewController, CustomWKWebDelegate, WKNavigationDele
         
 //        BookMarkArray.append(BookMark)
 //        saveData.set(BookMarkArray, forKey: "BOOKMARKS")
+        if BookMark.URL == "" {
+            let alert = UIAlertController(title: "URLを入力してください", message: "", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+            present(alert, animated: true, completion: nil)
+        }else{
+            if PasswordSaveData.object(forKey: "PASSWORD") == nil && BookMark.PrivateNum == 0{
+                let alert = UIAlertController(title: "パスワードを設定してください", message: "パスワードを入力", preferredStyle: .alert)
         
-        let realm = try! Realm()
+                let CancelAction: UIAlertAction = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.cancel, handler: {
+                    //キャンセルアクション
+                    (action:UIAlertAction!) -> Void in
+                })
+                let DoneAction:UIAlertAction = UIAlertAction(title: "Done", style: UIAlertActionStyle.default, handler: {
+                    (action:UIAlertAction!) -> Void in
+                    //OKアクション
+                    if alert.textFields != nil {
+                        self.PasswordSaveData.set(alert.textFields![0].text, forKey: "PASSWORD")
+                    }
+                    
+                })
+                alert.addAction(CancelAction)
+                alert.addAction(DoneAction)
+                
+                alert.addTextField(configurationHandler: {(text:UITextField!) -> Void in
+                    text.placeholder = "Password"})
+                
+                present(alert, animated: true, completion: nil)
+            }else{
+                let realm = try! Realm()
+                
+                try! realm.write({
+                    realm.add(BookMark)
+                })
+                
+                
+                NameTextField.text = ""
+                URLTextField.text = ""
+                NameTextField.endEditing(true)
+                URLTextField.endEditing(true)
+            }
+            
+        }
         
-        try! realm.write({
-            realm.add(BookMark)
-        })
-        
-        
-        //リセット
-        NameTextField.text = ""
-        URLTextField.text = ""
-        NameTextField.endEditing(true)
-        URLTextField.endEditing(true)
-        
-        
-//        //アイコン追加
-//        
-//        let webFrameY: CGFloat = 20
-//        let webFrameWidth = self.view.frame.width
-//        let webFrameHeight = self.view.frame.height - webFrameY
-//        let webFrame = CGRect(x: 0, y: webFrameY, width: webFrameWidth, height: webFrameHeight)
-//        testWeb = CustomWKWebView(frame: webFrame)
-//        testWeb.delegate = self
-//        testWeb.navigationDelegate = self
-//        self.view.addSubview(testWeb)
-//        
-//        testWeb.loadURL(url: BookMark.URL)
-//        
-//        if iconImage != nil{
-//            BookMark.Image = UIImagePNGRepresentation(iconImage)! as NSData
-//        }
-//        
-        
-        //Realm追加
-        let  bookmarks = realm.objects(Bookmark.self)
-        
-        
-        
-//        if let bookmark = bookmarks.first {
-//            print(bookmarks)
-//            print(type(of: bookmarks))
-//            print(bookmark)
-//            print(type(of: bookmark))
-//        }
+
         
     }
     

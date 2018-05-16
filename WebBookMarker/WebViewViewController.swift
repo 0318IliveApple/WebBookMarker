@@ -20,10 +20,21 @@ class WebViewViewController: UIViewController {
     @IBOutlet var tes: UILabel!
     
     func loadURL() {
-        tes.text = String(url)
-        let requestURL = URL(string: url)
-        let request = NSURLRequest(url: requestURL!)
-        WebView.loadRequest(request as URLRequest)
+        
+        guard let requestURL = URL(string: url)else{
+            tes.text = "有効なURLではありません"
+            return
+        }
+        
+        if UIApplication.shared.canOpenURL(requestURL) {
+            tes.text = ""
+            let request = NSURLRequest(url: requestURL)
+            WebView.loadRequest(request as URLRequest)
+            tes.text = String(url)
+        }else {
+            tes.text = "有効なURLではありません"
+        }
+        
     }
     
     
