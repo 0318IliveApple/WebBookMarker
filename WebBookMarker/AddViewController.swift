@@ -26,6 +26,8 @@ class AddViewController: UIViewController, CustomWKWebDelegate, WKNavigationDele
     var CaregoryNum: Int = 0
     var PrivateNum: Int = 0
     
+    let realm = try! Realm()
+    
     let PasswordSaveData = UserDefaults.standard
     
     
@@ -73,6 +75,7 @@ class AddViewController: UIViewController, CustomWKWebDelegate, WKNavigationDele
     }
     //BookMark追加
     @IBAction func addbookmarkes(){
+        let lastBookMarkID = realm.objects(Bookmark.self).last!.id
         
         let BookMark = Bookmark()
         BookMark.name = NameTextField.text!
@@ -81,6 +84,7 @@ class AddViewController: UIViewController, CustomWKWebDelegate, WKNavigationDele
         BookMark.PrivateNum = PrivateNum
         BookMark.CategoryNum = CaregoryNum
         BookMark.Read = 0
+        BookMark.id = lastBookMarkID + 1
         
 //        BookMarkArray.append(BookMark)
 //        saveData.set(BookMarkArray, forKey: "BOOKMARKS")
