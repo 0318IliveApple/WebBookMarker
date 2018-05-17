@@ -18,6 +18,6 @@ class Bookmark: Object {
     @objc dynamic var Image : NSData!
     @objc dynamic var CategoryNum:Int = 0
     @objc dynamic var Read: Int = 0
-    
+    @objc dynamic var id: Int = 0
 }
 

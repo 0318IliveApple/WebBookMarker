@@ -48,8 +48,8 @@ class MainTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.register(UINib(nibName: "MainTableViewCell", bundle: nil), forCellReuseIdentifier: "cell")
-//        navigationItem.rightBarButtonItem = editButtonItem
-//        navigationItem.rightBarButtonItem?.title = "削除"
+        //        navigationItem.rightBarButtonItem = editButtonItem
+        //        navigationItem.rightBarButtonItem?.title = "削除"
         
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
@@ -58,12 +58,12 @@ class MainTableViewController: UITableViewController {
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
     }
     
-//    override func setEditing(_ editing: Bool, animated: Bool) {
-//        super.setEditing(editing, animated: animated)
-//
-//        tableView.setEditing(editing, animated: animated)
-//        navigationItem.rightBarButtonItem?.title = "削除"
-//    }
+    //    override func setEditing(_ editing: Bool, animated: Bool) {
+    //        super.setEditing(editing, animated: animated)
+    //
+    //        tableView.setEditing(editing, animated: animated)
+    //        navigationItem.rightBarButtonItem?.title = "削除"
+    //    }
     
     
     
@@ -156,9 +156,9 @@ class MainTableViewController: UITableViewController {
             cell.Check.setImage(checkImg, for: .normal)
         }
         
-//        var iconimage = UIImage(data: nowIndexPath.Image as Data)
-//        iconimage = UIImage(data: nowIndexPath.Image as Data)
-//        cell.PageImage = UIImageView(image: iconimage)
+        //        var iconimage = UIImage(data: nowIndexPath.Image as Data)
+        //        iconimage = UIImage(data: nowIndexPath.Image as Data)
+        //        cell.PageImage = UIImageView(image: iconimage)
         
         return cell
     }
@@ -292,10 +292,14 @@ class MainTableViewController: UITableViewController {
     
     
     func reloadarray(){
-        bookmarks = realm.objects(Bookmark.self).filter(" PrivateNum == 0")
-        BookMarkArray = Array(bookmarks)
-        bookmarks = realm.objects(Bookmark.self)
-        PrivateBookMarkArray = Array(bookmarks)
+        if PrivateMode == false {
+            bookmarks = realm.objects(Bookmark.self).filter(" PrivateNum == 0")
+            BookMarkArray = Array(bookmarks)
+        }else {
+            bookmarks = realm.objects(Bookmark.self)
+            PrivateBookMarkArray = Array(bookmarks)
+        }
+        
         self.sort(num: self.SortedNum)
         tableView.reloadData()
     }
