@@ -21,32 +21,27 @@ class MainTableViewCell: UITableViewCell {
     var row: Int!
     let realm = try! Realm()
     var PrivateMode:Bool!
-    
+    var id: Int!
 
     
     
     let checkImg = UIImage(named: "check")
     let nonCheckImg = UIImage(named: "Non-check")
     @IBAction func ChageCheck(){
-        var BookMarks = realm.objects(Bookmark.self)
-        if PrivateMode == false {
-            BookMarks = realm.objects(Bookmark.self).filter(" PrivateNum == 0")
-        }else{
-            BookMarks = realm.objects(Bookmark.self)
-        }
-        if BookMarks[row].Read == 0 {
+        let selectedBookMark = self.realm.objects(Bookmark.self).filter("id == %@", id)
+
+        if selectedBookMark[0].Read == 0 {
             try! self.realm.write() {
-                BookMarks[row].Read = 1
+                selectedBookMark[0].Read = 1
             }
             Check.setImage(checkImg, for: .normal)
         }else{
             try! self.realm.write() {
-                BookMarks[row].Read = 0
+                selectedBookMark[0].Read = 0
             }
             Check.setImage(nonCheckImg, for: .normal)
-            
         }
-        print(BookMarks)
+        
     }
     
     override func awakeFromNib() {

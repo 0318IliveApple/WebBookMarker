@@ -147,6 +147,7 @@ class MainTableViewController: UITableViewController {
         
         cell.row = indexPath.row
         cell.PrivateMode = self.PrivateMode
+        cell.id = nowIndexPath.id
         //画像表示
         let checkImg = UIImage(named: "check")
         let nonCheckImg = UIImage(named: "Non-check")
@@ -167,20 +168,25 @@ class MainTableViewController: UITableViewController {
         
         //削除機能
         let deleteButton: UITableViewRowAction = UITableViewRowAction(style: .normal, title: "削除") { (action, index) -> Void in
-            self.BookMarkArray.remove(at: indexPath.row)
+            var id:Int!
+            if self.PrivateMode == false {
+                id = self.BookMarkArray[indexPath.row].id
+                self.BookMarkArray.remove(at: indexPath.row)
+            }else{
+                id = self.PrivateBookMarkArray[indexPath.row].id
+                self.PrivateBookMarkArray.remove(at: indexPath.row)
+            }
+            
             tableView.deleteRows(at: [indexPath], with: .fade)
-            
-            self.bookmarks = self.realm.objects(Bookmark.self)
-            let pre = self.bookmarks[indexPath.row]
-            
+            let selectedBookMark = self.realm.objects(Bookmark.self).filter("id == %@", id)
             
             // さようなら・・・
             try! self.realm.write() {
-                self.realm.delete(pre)
+                self.realm.delete(selectedBookMark[0])
             }
             
             self.reloadarray()
-            
+            self.sort(num: self.SortedNum)
             
             //            self.saveData.set(self.BookMarkArray, forKey: "BOOKMARKS")
             
@@ -197,11 +203,16 @@ class MainTableViewController: UITableViewController {
         
         let selectedDic = BookMarkArray[indexPath.row].URL
         
+        //改善中。。
+        
+        let id = BookMarkArray[indexPath.row].id
+        let selectedBookMark = realm.objects(Bookmark.self).filter("id == %@", id)
         try! self.realm.write() {
             bookmarks[indexPath.row].Read = 1
+            selectedBookMark[0].id = 1
         }
         reloadarray()
-        
+        self.sort(num: self.SortedNum)
         performSegue(withIdentifier: "toWebSegue", sender: selectedDic)
     }
     
@@ -209,7 +220,6 @@ class MainTableViewController: UITableViewController {
         let webViewController = segue.destination as! WebViewViewController
         webViewController.url = sender as! String
     }
-    
     
     //Privatemode
     
@@ -231,6 +241,7 @@ class MainTableViewController: UITableViewController {
                         self.CangePrivateButton.setImage(UIImage(named: "unLock"), for: .normal)
                         self.PrivateMode = true
                         self.reloadarray()
+                        self.sort(num: self.SortedNum)
                         
                     }else {
                         //パスワード不正解
@@ -252,7 +263,7 @@ class MainTableViewController: UITableViewController {
         }else {
             self.CangePrivateButton.setImage(UIImage(named: "Lock"), for: .normal)
             PrivateMode = false
-            reloadarray()
+            
         }
         
     }
@@ -315,6 +326,8 @@ class MainTableViewController: UITableViewController {
             //日付　昇順
             self.SortButton.setTitle("日付　昇順", for: .normal)
             self.BookMarkArray.sort(by: { $0.time.compare($1.time as Date) == ComparisonResult.orderedDescending})
+            self.PrivateBookMarkArray.sort(by: { $0.time.compare($1.time as Date) == ComparisonResult.orderedDescending})
+            self.BookMarkArray.reverse()
             self.PrivateBookMarkArray.reverse()
             self.tableView.reloadData()
         }else if num == 2 {
@@ -323,12 +336,14 @@ class MainTableViewController: UITableViewController {
             self.BookMarkArray.sort(by: { $0.CategoryNum < $1.CategoryNum })
             self.PrivateBookMarkArray.sort(by: { $0.CategoryNum < $1.CategoryNum })
             self.tableView.reloadData()
+            print(BookMarkArray)
         }else if num == 3 {
             //完了順ソート
             self.SortButton.setTitle("完了順", for: .normal)
             self.BookMarkArray.sort(by: { $0.Read < $1.Read })
             self.PrivateBookMarkArray.sort(by: { $0.Read < $1.Read })
             self.tableView.reloadData()
+            print(BookMarkArray)
         }
     }
     

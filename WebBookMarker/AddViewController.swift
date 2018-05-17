@@ -75,7 +75,10 @@ class AddViewController: UIViewController, CustomWKWebDelegate, WKNavigationDele
     }
     //BookMark追加
     @IBAction func addbookmarkes(){
-        let lastBookMarkID = realm.objects(Bookmark.self).last!.id
+        var lastBookMarkID: Int = 0
+        if realm.objects(Bookmark.self).last != nil{
+            lastBookMarkID = realm.objects(Bookmark.self).last!.id
+        }
         
         let BookMark = Bookmark()
         BookMark.name = NameTextField.text!
@@ -93,7 +96,7 @@ class AddViewController: UIViewController, CustomWKWebDelegate, WKNavigationDele
             alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
             present(alert, animated: true, completion: nil)
         }else{
-            if PasswordSaveData.object(forKey: "PASSWORD") == nil && BookMark.PrivateNum == 0{
+            if PasswordSaveData.object(forKey: "PASSWORD") == nil && BookMark.PrivateNum == 1{
                 let alert = UIAlertController(title: "パスワードを設定してください", message: "パスワードを入力", preferredStyle: .alert)
         
                 let CancelAction: UIAlertAction = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.cancel, handler: {

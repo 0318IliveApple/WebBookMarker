@@ -32,9 +32,8 @@
                         <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Non-Category" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dXH-0T-Zhj">
-                        <rect key="frame" x="198" y="31" width="122" height="21"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Non-Category" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dXH-0T-Zhj">
+                        <rect key="frame" x="210.5" y="31" width="109.5" height="21"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="0.42735980309999999" colorSpace="custom" customColorSpace="displayP3"/>
                         <nil key="highlightedColor"/>
@@ -47,11 +46,16 @@
                             <action selector="ChageCheck" destination="KGk-i7-Jjw" eventType="touchUpInside" id="rbY-0U-ysI"/>
                         </connections>
                     </button>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="H3N-BI-eIF">
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="H3N-BI-eIF">
                         <rect key="frame" x="295" y="3" width="25" height="25"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     </imageView>
                 </subviews>
+                <constraints>
+                    <constraint firstAttribute="trailing" secondItem="H3N-BI-eIF" secondAttribute="trailing" id="ZCI-Sw-Ycz"/>
+                    <constraint firstAttribute="bottom" secondItem="dXH-0T-Zhj" secondAttribute="bottom" constant="7.5" id="oaA-dP-CeK"/>
+                    <constraint firstAttribute="trailing" secondItem="dXH-0T-Zhj" secondAttribute="trailing" id="ugJ-II-j5E"/>
+                    <constraint firstItem="H3N-BI-eIF" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="3" id="wys-t6-7bH"/>
+                </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
