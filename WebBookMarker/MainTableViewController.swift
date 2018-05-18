@@ -272,7 +272,8 @@ class MainTableViewController: UITableViewController {
         }else {
             self.CangePrivateButton.setImage(UIImage(named: "Lock"), for: .normal)
             PrivateMode = false
-            
+            reloadarray()
+            self.sort(num: self.SortedNum)
         }
         
     }
