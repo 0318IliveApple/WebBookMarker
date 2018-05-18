@@ -30,7 +30,6 @@ class WebViewViewController: UIViewController {
             tes.text = ""
             let request = NSURLRequest(url: requestURL)
             WebView.loadRequest(request as URLRequest)
-            tes.text = String(url)
         }else {
             tes.text = "有効なURLではありません"
         }

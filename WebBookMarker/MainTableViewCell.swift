@@ -22,6 +22,9 @@ class MainTableViewCell: UITableViewCell {
     let realm = try! Realm()
     var PrivateMode:Bool!
     var id: Int!
+    
+    var PrivateBookMarkArray: [Bookmark] = []
+    var BookMarkArray: [Bookmark] = []
 
     
     

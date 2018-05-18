@@ -124,11 +124,14 @@ class MainTableViewController: UITableViewController {
         
         // Cellの表示
         var nowIndexPath: Bookmark
+
         if PrivateMode == true {
             nowIndexPath = PrivateBookMarkArray[indexPath.row]
         }else{
             nowIndexPath = BookMarkArray[indexPath.row]
         }
+        cell.BookMarkArray = self.BookMarkArray
+        cell.PrivateBookMarkArray = self.PrivateBookMarkArray
         cell.NameLabel.text = nowIndexPath.name
         cell.URLLabel.text = nowIndexPath.URL
         if CategoryArray.count > nowIndexPath.CategoryNum {
@@ -201,19 +204,25 @@ class MainTableViewController: UITableViewController {
     override func tableView(_ table: UITableView, didSelectRowAt indexPath: IndexPath) {
         // SubViewController へ遷移するために Segue を呼び出す
         
-        let selectedDic = BookMarkArray[indexPath.row].URL
         
-        //改善中。。
-        
-        let id = BookMarkArray[indexPath.row].id
+        var id:Int!
+        if PrivateMode == false {
+            id = self.BookMarkArray[indexPath.row].id
+        }else{
+            id = self.PrivateBookMarkArray[indexPath.row].id
+        }
+        print(BookMarkArray)
+        print("############################")
+        print(id)
+        print("############################")
         let selectedBookMark = realm.objects(Bookmark.self).filter("id == %@", id)
         try! self.realm.write() {
-            bookmarks[indexPath.row].Read = 1
-            selectedBookMark[0].id = 1
+            selectedBookMark[0].Read = 1
         }
+        let selectedURL = selectedBookMark[0].URL
         reloadarray()
         self.sort(num: self.SortedNum)
-        performSegue(withIdentifier: "toWebSegue", sender: selectedDic)
+        performSegue(withIdentifier: "toWebSegue", sender: selectedURL)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
